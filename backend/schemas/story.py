@@ -4,15 +4,15 @@ from pydantic import BaseModel
 
 class StoryOptionsSchema(BaseModel):
     text: str
-    node_id: Optional[str] = None
+    node_id: Optional[int] = None
 
 class StoryNodeBase(BaseModel):
     content: str
-    is_ending: bool = False
-    is_winning_ending: bool = False
+    isEnding: bool = False
+    isWinningEnding: bool = False
 
 class CompleteStoryNodeResponse(StoryNodeBase):
-    id: str
+    id: int
     options: List[StoryOptionsSchema] = []
 
     class Config:
@@ -29,7 +29,7 @@ class CreateStoryRequest(StoryBase):
     theme: str
 
 class CompleteStoryResponse(StoryBase):
-    id: str
+    id: int
     created_at: datetime
     root_node: CompleteStoryNodeResponse
     all_nodes: Dict[int, CompleteStoryNodeResponse] = {}
